@@ -1,4 +1,4 @@
-# Known limitations (Beta v0.1.0)
+# Known limitations (Beta v0.1.1)
 
 Written to be accurate, not reassuring. "Verified" means it was run; "not verified" means it was not.
 
@@ -23,6 +23,15 @@ Written to be accurate, not reassuring. "Verified" means it was run; "not verifi
 - Dependency vulnerabilities use the public OSV service (package names and versions only) unless you use `--offline` with a downloaded database.
 - Git-history secret findings (`--deep`) show the commit; the secret value itself is never stored.
 - Runtime behaviour, business logic and authentication design are **not** analysed.
+
+## Security limits (read `SECURITY_MODEL.md`)
+- The scanner programs are **not sandboxed**: they run as you with the project as their working folder. Scanning a hostile project is like parsing its files, not like running it in a virtual machine.
+- Project suppressions that the scanners honour and QAMAR cannot disable (`.gitleaksignore`, `trivy:ignore`, `biome-ignore`) can still hide findings; they are reported, and the first two make the run partial unless you acknowledge them.
+- A file over 2 MB is not analysed by any engine; the run is partial unless you pass `--accept-skipped-large`.
+- Pattern-based redaction of stored text can miss unusual secret formats. Do not share raw scan files.
+- `simplify --apply` restores your file if your tests fail and keeps a recovery journal for interrupted runs; power loss in the middle of a write is not tested.
+- Executable pins in the package cover Windows x64 only. QAMAR does not check what Windows or antivirus may do to the scanner files.
+- **Beta v0.1.0 has a security flaw (a scanned Git repository could run a program). Use v0.1.1 or later.**
 
 ## Experimental features
 - `simplify`: suggested rewrites with an equivalence label. `--apply` edits the target file and refuses it unless that file is tracked and unmodified in a git work tree

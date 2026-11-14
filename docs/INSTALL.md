@@ -9,14 +9,14 @@
 ## Verify the package (recommended)
 The release came with a `.sha256` file. In PowerShell, in the folder containing the ZIP:
 ```
-Get-FileHash .\qamar-0.1.0-beta-win-x64.zip -Algorithm SHA256
+Get-FileHash .\qamar-0.1.1-beta-win-x64.zip -Algorithm SHA256
 ```
 The value must equal the one in the `.sha256` file and in the message you received it with. The ZIP is **not code-signed**; the checksum
 is how you know it is the file that was released. Inside the package, `CHECKSUMS.txt` lists the SHA-256 of every file;
 `qamar-diagnose.cmd` re-checks them.
 
 ## Unzip
-Right-click the ZIP and choose **Extract All** in Explorer, or run `tar -xf qamar-0.1.0-beta-win-x64.zip` (Windows 10/11 include `tar`), or use 7-Zip. On some machines
+Right-click the ZIP and choose **Extract All** in Explorer, or run `tar -xf qamar-0.1.1-beta-win-x64.zip` (Windows 10/11 include `tar`), or use 7-Zip. On some machines
 Windows PowerShell 5.1's `Expand-Archive` fails with "Cannot find an overload for ExtractToDirectory" for **any** ZIP file; that is a PowerShell/module problem
 on that computer, not a damaged download: use one of the other methods. Extract to a normal folder (spaces in the folder name are fine).
 
